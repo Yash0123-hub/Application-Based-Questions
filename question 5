@@ -1,0 +1,17 @@
+import numpy as np
+from sklearn.tree import DecisionTreeClassifier, export_text
+X = np.array([
+    [45000, 720, 0],
+    [30000, 650, 1],
+    [60000, 780, 0],
+    [28000, 620, 2],
+    [52000, 710, 1]
+])
+y = np.array([1, 0, 1, 0, 1])
+model = DecisionTreeClassifier()
+model.fit(X, y)
+new_applicant = np.array([[50000, 700, 1]])
+prediction = model.predict(new_applicant)
+print("Loan Approved" if prediction[0] == 1 else "Loan Rejected")
+print("\nDecision Rules:")
+print(export_text(model, feature_names=["Income", "Credit_Score", "Existing_Loans"]))
